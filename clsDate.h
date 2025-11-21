@@ -26,7 +26,7 @@ class clsDateFunctions {
      virtual string MonthName()=0;
      virtual void printMonthCalnder()=0;
      virtual void PrintYearCalnder()=0;
-    virtual int TotalDaysSinceTheD()=0;
+    virtual int TotalDaysSinceThisDate()=0;
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
     virtual void TheYearAfterAddDays(short d)=0;
@@ -259,7 +259,7 @@ public:
          PrintYearCalnder(this->y);
     }
 
-    static int TotalDaysSinceTheD(short y, short m, short d)
+    static int TotalDaysSinceThisDate(short y, short m, short d)
     {
         int totalDaysInMonths = 0;
 
@@ -271,11 +271,10 @@ public:
         // int the_rest_days_in_month = NumberOfDaysInMonth(y, m) - d;
 
         return totalDaysInMonths += d;
-    } //Number of days from begining of the year is
-    int TotalDaysSinceTheD() {
-        return TotalDaysSinceTheD(this->y , this->m , this->d);
+    } // count the total days untill the current date
+    int TotalDaysSinceThisDate() {
+        return TotalDaysSinceThisDate(this->y , this->m , this->d);
     }
-
 
     static short DayUntillDate(clsDate d)
     {
@@ -287,19 +286,19 @@ public:
         }
         return totalDays + d.d;
     }
-
-     short DayUntillDate()
+    short DayUntillDate()
     {
      return DayUntillDate(*this);
     }
 
-    struct Stdate
+private : struct Stdate
     {
         short y;
         short m;
         short d;
     };
-
+   //_______________________________________________________________________________//
+public:
     static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
 
         // NOdayUntillDate is the number of days from 1/1 untill your day
@@ -326,11 +325,9 @@ public:
         }
         return clsDate(data.d,data.m,data.y);
     }
-
-    //convert number of days to real date ( affect on class)
     void DateAfterNumOfDays(short NOdayUntillDate) {
-     clsDate(d,m,y) =  DateAfterNumOfDays(NOdayUntillDate,this->y);
-    }
+      *this =  DateAfterNumOfDays(NOdayUntillDate,this->y);
+    }//convert number of days to real date ( affect on current object)
 
    static clsDate TheYearAfterAddDays(clsDate date, short d)
     {
@@ -361,9 +358,8 @@ public:
         }
         return clsDate(date.d,date.m , date.y);
     }
-
-    void TheYearAfterAddDays(short d) {
-        clsDate(d,m,y) = TheYearAfterAddDays(*this ,d);
+    void TheYearAfterAddDays(short d) override {
+       *this = TheYearAfterAddDays(*this ,d);
     }
 
 // is date 1 less than date 2
