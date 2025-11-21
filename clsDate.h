@@ -40,13 +40,13 @@ class clsDateFunctions {
 
 class clsDate : private clsDateFunctions  {
 private:
-    static  short y ;
-   static short m;
-  static  short d;
+      short y ;
+    short m;
+    short d;
 
 public:
     clsDate() {
-        clsDate(d,m,y)=CurrentLocalDate();
+       *this =  CurrentLocalDate();
     }
 
     clsDate(short d , short m , short y) {
@@ -57,7 +57,7 @@ public:
     }
 
     clsDate(short  NumberOfDays, short Year ) {
-        clsDate(d, m, y) = DateAfterNumOfDays(NumberOfDays,Year);
+       *this =  DateAfterNumOfDays(NumberOfDays,Year);
         // --> convert days to date
     }
 
@@ -171,8 +171,8 @@ public:
     }
 
 // for static
-    static  string fullDate( ) {
-        return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
+    static  string fullDate(clsDate date) {
+        return (to_string(date.d) + "/" + to_string(date.m) + "/" + to_string(date.y));
     }
 
     short DayOrder(short year, short month, short day)
@@ -434,10 +434,23 @@ public:
     }
 
 
+    static  int yourAgeInDays(clsDate birthday, clsDate d1)
+    {
+        int days = 0;
+        while (isDate1LessThanDate2(birthday, d1))
+        {
+            days++; // add days from 1/8/2006 untill 3/9/2025
+            birthday = dateAfterAddingOneDay(birthday);
+        }
+        return days;
+    }
 
+    int yourAgeInDays(clsDate BirthdayObj ) {
+        return yourAgeInDays(BirthdayObj, *this );
+    }
 
 };
 
-short  clsDate::d=0;
-short clsDate::m=0;
-short clsDate::y=0;
+// short  clsDate::d=0;
+// short clsDate::m=0;
+// short clsDate::y=0;

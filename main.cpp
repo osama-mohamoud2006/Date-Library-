@@ -40,9 +40,16 @@ int main() {
 
     // stdate DATETODAY = CURRENTLOCALTIME();
     // cout<<DATETODAY.d<<" / "<<DATETODAY.m<<" / "<<DATETODAY.y<<endl;
+    clsDate MYBIRTHDAY (1,8,2006);
+    clsDate d6(21,11,2025);
+    cout<<"Date 6 is: "<<d6.FullDate()<<endl;
+    cout<<"Birthday is: "<<MYBIRTHDAY.FullDate()<<endl;
+    cout<<"So i lived for: "<<d6.yourAgeInDays(MYBIRTHDAY)<<endl; 
 
-    clsDate d5;
-     cout<<d5.FullDate()<<endl;
+    clsDate d7;
+    cout<<d7.FullDate()<<endl;
+
+
 
 }
 
