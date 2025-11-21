@@ -9,6 +9,10 @@ int main() {
 
     clsDate d2(325,2025);
 
-    cout<<d2.FullDate()<<endl;
+    //cout<<d2.FullDate()<<endl;
+
+    clsDate::DateAfterNumOfDays(325,2025);
+    cout << clsDate::fullDate()<<endl ;
+
 
 }

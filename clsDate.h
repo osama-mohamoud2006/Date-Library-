@@ -25,6 +25,7 @@ class clsDateFunctions {
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate(short y, short m, short d)=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
+    virtual
 
 
 
@@ -155,10 +156,15 @@ public:
     string FullDate(short y, short m, short d)
     {
         return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
-    }
-
+    } // for functions
+// for object
     string FullDate( )
     {
+        return (to_string(this->d) + "/" + to_string(this->m) + "/" + to_string(this->y));
+    }
+
+// for static
+    static  string fullDate( ) {
         return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
     }
 
@@ -284,6 +290,36 @@ public:
      clsDate(d,m,y) =  DateAfterNumOfDays(NOdayUntillDate,this->y);
     }
 
+
+    stdate TheYearAfterAddDays(clsDate date, short d)
+    {
+        short RemainingDays = d + DayUntillDate(date); // total days
+
+        date.m = 1;
+        while (true)
+        {
+            short daysInMonth = NumberOfDaysInMonth(date.y, date.m);
+
+            if (RemainingDays > daysInMonth)
+            {
+                RemainingDays -= daysInMonth;
+                date.m++;
+
+                if (date.m > 12)
+                {
+                    date.m = 1;
+                    date.y++; // if new year
+                }
+            }
+            else
+            {
+
+                date.d = RemainingDays;
+                break;
+            }
+        }
+        return date;
+    }
 
 };
 
