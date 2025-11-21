@@ -26,7 +26,7 @@ class clsDateFunctions {
      virtual string MonthName()=0;
      virtual void printMonthCalnder()=0;
      virtual void PrintYearCalnder()=0;
-    virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
+    virtual int TotalDaysSinceTheD()=0;
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
     virtual void TheYearAfterAddDays(short d)=0;
@@ -259,7 +259,7 @@ public:
          PrintYearCalnder(this->y);
     }
 
-    int TotalDaysSinceTheD(short y, short m, short d)
+    static int TotalDaysSinceTheD(short y, short m, short d)
     {
         int totalDaysInMonths = 0;
 
@@ -272,8 +272,11 @@ public:
 
         return totalDaysInMonths += d;
     } //Number of days from begining of the year is
+    int TotalDaysSinceTheD() {
+        return TotalDaysSinceTheD(this->y , this->m , this->d);
+    }
 
-//11
+
     static short DayUntillDate(clsDate d)
     {
         short totalDays = 0;
