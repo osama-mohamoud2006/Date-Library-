@@ -3,6 +3,9 @@
 #include <string>
 #include <iomanip>
 #include <stdio.h>
+#include <cmath>
+#include <ctime>
+#include <stdio.h>
 using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
@@ -42,15 +45,15 @@ private:
   static  short d;
 
 public:
+    clsDate() {
+        clsDate(d,m,y)=CurrentLocalDate();
+    }
+
     clsDate(short d , short m , short y) {
         if (d>NumberOfDaysInMonth(y,m)) d=NumberOfDaysInMonth(y,m); // if user entered day bigger than actual days in month
         this->d=d;
         this->m=m;
         this->y=y;
-    }
-
-    clsDate() {
-
     }
 
     clsDate(short  NumberOfDays, short Year ) {
@@ -260,7 +263,7 @@ public:
      return DayUntillDate(*this);
     }
 
-    struct date
+    struct Stdate
     {
         short y;
         short m;
@@ -270,7 +273,7 @@ public:
     static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
 
         // NOdayUntillDate is the number of days from 1/1 untill your day
-        date data;
+        Stdate data;
         data.y = y; // the year
 
         short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
@@ -403,7 +406,7 @@ public:
     }
 
 
-    static int diffBetween2days(stdate date1, stdate date2, bool endDay = false)
+    static int diffBetween2days(clsDate date1, clsDate date2, bool endDay = false)
     {
         int days =0;
         while (isDate1LessThanDate2(date1, date2))
@@ -413,6 +416,24 @@ public:
         }
         return (endDay==false)? days : ++days;
     }
+     int diffBetween2days(clsDate date2, bool endDay = false) {
+        return diffBetween2days(*this , date2 , endDay);
+    }
+
+
+    static clsDate CurrentLocalDate()
+    {
+        Stdate date;
+        time_t epoch_time = time(0);
+        tm *date_now = localtime(&epoch_time);
+        // d/ m/ y --> 3/9/2025
+        date.d = date_now->tm_mday;
+        date.m = (date_now->tm_mon) + 1;
+        date.y = (date_now->tm_year) + 1900;
+        return clsDate(date.d,date.m,date.y);
+    }
+
+
 
 
 };
