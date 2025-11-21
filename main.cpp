@@ -45,16 +45,18 @@ int main() {
 
     // cout<<"Birthday is: "<<MYBIRTHDAY.FullDate()<<endl;
     // cout<<"So i lived for: "<<d6.yourAgeInDays(MYBIRTHDAY)<<endl;
+//
+//     clsDate d7;
+//     cout<<"The Date1 before swap: "<<d7.FullDate()<<endl;
+//     cout<<"Date before swap  is: "<<d6.FullDate()<<endl;
+//
+// clsDate::swapDates(d7,d6);
+// cout<<"\n__________________\n";
+//     cout<<"The Date1 after swap: "<<d7.FullDate()<<endl;
+//     cout<<"Date after swap  is: "<<d6.FullDate()<<endl;
 
-    clsDate d7;
-    cout<<"The Date1 before swap: "<<d7.FullDate()<<endl;
-    cout<<"Date before swap  is: "<<d6.FullDate()<<endl;
-
-clsDate::swapDates(d7,d6);
-cout<<"\n__________________\n";
-    cout<<"The Date1 after swap: "<<d7.FullDate()<<endl;
-    cout<<"Date after swap  is: "<<d6.FullDate()<<endl;
-
+clsDate d("1/12/2006");
+    cout<<d.FullDate()<<endl;
 
 
 }

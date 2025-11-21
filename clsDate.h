@@ -1,16 +1,16 @@
 #pragma once
 #include <iostream>
+#include "E:\projects\c++ course\10-OOP Concepts\Project 2\Project 2\clsString.h";
 #include <string>
 #include <iomanip>
+#include<vector>
 #include <stdio.h>
 #include <cmath>
 #include <ctime>
-#include <stdio.h>
-class clsDate;
+
 using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
-    virtual string numberToText(int num)=0;
     virtual   bool isLeap()=0;
     virtual short numberOFDays(short y)=0;
     virtual int numberOfHours(short y)=0;
@@ -38,14 +38,20 @@ class clsDateFunctions {
 class clsDate : private clsDateFunctions  {
 private:
       short y ;
-    short m;
-    short d;
+     short m;
+     short d;
 
 public:
+    //take the local time 
     clsDate() {
-       *this =  CurrentLocalDate();
+       *this =  CurrentLocalDate(); // make the current object have all data of this clsDate function
     }
 
+    clsDate(string FullDate ) {
+        clsString::SetDelmi("/");
+      vector<string > date = clsString::SplitString(FullDate);
+        *this =clsDate( (short)stoi(date.at(0) ) , (short)stoi( date.at(1) ) , (short)stoi(date.at(2)));
+    }
     clsDate(short d , short m , short y) {
         if (d>NumberOfDaysInMonth(y,m)) d=NumberOfDaysInMonth(y,m); // if user entered day bigger than actual days in month
           if (m>12) m=12;
@@ -53,14 +59,13 @@ public:
         this->m=m;
         this->y=y;
     }
-
     clsDate(short  NumberOfDays, short Year ) {
-       *this =  DateAfterNumOfDays(NumberOfDays,Year);
-        // --> convert days to date
+       *this =  DateAfterNumOfDays(NumberOfDays,Year); // --> convert days to date
+
     }
 
-//p1
-    string numberToText(int num)
+
+    static string numberToText(int num)
     {
         if (num == 0)
             return "";
@@ -95,14 +100,13 @@ public:
         }
     }
 
-//p2||3
+
    static  bool isLeap(short y)
     {
         // if it divided by 400 --> leap
         // if it divided by 4 And not divided by 100 --> leap
         return ((y % 400 == 0)|| (y%4==0 && y%100!=0) );
     }
-
     bool isLeap() {
         return isLeap(this->y);
     }
@@ -470,7 +474,8 @@ public:
         return yourAgeInDays(BirthdayObj, *this );
     }
 
-    
+    // start from 20 to 32 .cpp
+   // start from add x days ()
 
 };
 
