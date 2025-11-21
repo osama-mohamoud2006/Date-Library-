@@ -39,6 +39,10 @@ int main() {
 
     clsDate d = clsDate(325,2025);
     cout<<d.FullDate()<<endl;
+    d.dateAfterAddingOneDay();
+    cout<<d.FullDate()<<endl;
+     clsDate d6(3,10,2000);
+    cout<< "The diff is: "<<d.DiffBetween2DatesInDays(d6,true );
 
 
 

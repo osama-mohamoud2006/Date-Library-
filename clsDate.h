@@ -44,7 +44,7 @@ private:
 public:
 
     clsDate() {
-       *this =  CurrentLocalDate(); // make the current object have all data of this clsDate function
+       *this =  GetCurrentLocalDate(); // make the current object have all data of this clsDate function
     } //take the local time
     clsDate(string FullDate ) {
         clsString::SetDelmi("/");
@@ -362,7 +362,7 @@ public:
     void AddDaysToDate(short d) override {
        *this = AddDaysToDate(*this ,d);
     }
----------------------------
+
 // is date 1 less than date 2
     static bool isDate1LessThanDate2 (clsDate date , clsDate date2)
     {
@@ -374,7 +374,6 @@ public:
                  : false
                : false;
     }
-
     bool isDate1LessThanDate2(clsDate date2 ) {  // for object obj>d2
         return isDate1LessThanDate2(*this ,date2);
     }
@@ -383,17 +382,14 @@ public:
     {
         return ((date.y == date2.y) && (date.m == date2.m) && (date.d == date2.d));
     }
-
     bool isDate1equalsDate2(clsDate date2) { // for object
         return isDate1equalsDate2( *this ,  date2);
     }
-
 
     static bool isLastDayInMonth(clsDate date)
     {
         return (NumberOfDaysInMonth(date.y, date.m) == date.d);
     }
-
     bool isLastDayInMonth() {
         return isLastDayInMonth(*this);
     }
@@ -402,7 +398,6 @@ public:
     {
         return (date.m == 12) ;
     }
-
     bool isLastMonthInYear() {
         return  isLastMonthInYear(*this);
     }
@@ -427,11 +422,10 @@ public:
         }
         return clsDate(date.d,date.m,date.y);
     }
-
     void dateAfterAddingOneDay() {
-        clsDate(d,m,y) = dateAfterAddingOneDay(*this);
+       *this =  dateAfterAddingOneDay(*this);
     }
-
+    
     static void swapDates(clsDate &date1, clsDate &date2)
     {
         clsDate temp;
@@ -448,7 +442,7 @@ public:
         date2.y = temp.y;
     }
 
-    static int DiffBetween2DatesInDays(clsDate date1, clsDate date2, bool endDay = false)
+    static int DiffBetween2DatesInDays(clsDate date1, clsDate date2)
     {
         int FlagedAsD1IsnotLessD2 = 1;
         int days = 0;
@@ -465,13 +459,11 @@ public:
         }
         return days * FlagedAsD1IsnotLessD2;
     }
-
-     int DiffBetween2DatesInDays(clsDate date2, bool endDay = false) {
-        return DiffBetween2DatesInDays(*this , date2 , endDay);
+     int DiffBetween2DatesInDays(clsDate date2){
+        return DiffBetween2DatesInDays(*this , date2 );
     }
 
-
-    static clsDate CurrentLocalDate()
+    static clsDate GetCurrentLocalDate()
     {
         Stdate date;
         time_t epoch_time = time(0);
@@ -494,7 +486,6 @@ public:
         }
         return days;
     }
-
     int yourAgeInDays(clsDate BirthdayObj ) {
         return yourAgeInDays(BirthdayObj, *this );
     }
