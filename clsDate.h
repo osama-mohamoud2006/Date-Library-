@@ -24,7 +24,7 @@ class clsDateFunctions {
      virtual void PrintYearCalnder(short y)=0;
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate(short y, short m, short d)=0;
- // virtual clsDateFunctions DateAfterNumOfDays(short NOdayUntillDate, short y)=0;
+  virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
 
 
 
@@ -38,6 +38,7 @@ private:
 
 public:
     clsDate(short d , short m , short y) {
+        if (d>NumberOfDaysInMonth(y,m)) d=NumberOfDaysInMonth(y,m); // if user entered day bigger than actual days in month
         this->d=d;
         this->m=m;
         this->y=y;
@@ -45,6 +46,7 @@ public:
     clsDate() {
 
     }
+    void GetFullDate(){}
 //p1
     string numberToText(int num)
     {
@@ -93,7 +95,7 @@ public:
     short numberOFDays(short y)
     {
         return (isLeap(y) == true) ? 366 : 365;
-    }
+    } // number of days  in year
 
     int numberOfHours(short y)
     {
@@ -137,6 +139,11 @@ public:
 
     //7
     string FullDate(short y, short m, short d)
+    {
+        return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
+    }
+
+    string FullDate( )
     {
         return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
     }
@@ -224,11 +231,12 @@ public:
         return totalDays + d;
     }
 
-    clsDate DateAfterNumOfDays(short NOdayUntillDate, short y)
+    void DateAfterNumOfDays(short NOdayUntillDate)
     {
         // NOdayUntillDate is the number of days from 1/1 untill your day
-        clsDate data;
-        data.y = y; // the year
+        short y =this->y;
+
+      // the year
 
         short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
         short m = 1;
@@ -243,12 +251,12 @@ public:
             }
             else
             {
-                data.m = m;
-                data.d = RemainingDays;
+                this->m = m;
+                this->d = RemainingDays;
                 break;
             }
         }
-        return clsDate(d,m,y) ;
+
     }
 
 
