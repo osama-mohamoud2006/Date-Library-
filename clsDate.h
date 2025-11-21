@@ -49,8 +49,8 @@ public:
     }
 
     clsDate(short  NumberOfDays, short Year ) {
-        date d1 = DateAfterNumOfDays(NumberOfDays,Year);
-        clsDate(d1.d,d1.m , d1.y); // --> convert days to date
+        clsDate(d, m, y) = DateAfterNumOfDays(NumberOfDays,Year);
+        // --> convert days to date
     }
 
 //p1
@@ -245,14 +245,14 @@ public:
         return totalDays + d;
     }
 
-     struct date
+    struct date
     {
         short y;
         short m;
         short d;
     };
 
-    static date DateAfterNumOfDays(short NOdayUntillDate,short y) {
+    static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
 
         // NOdayUntillDate is the number of days from 1/1 untill your day
         date data;
@@ -276,14 +276,12 @@ public:
                 break;
             }
         }
-        return data;
+        return clsDate(data.d,data.m,data.y);
     }
 
     //convert number of days to real date ( affect on class)
     void DateAfterNumOfDays(short NOdayUntillDate) {
-        date d1 = DateAfterNumOfDays(NOdayUntillDate,this->y);
-        clsDate(d1.d,d1.m , d1.y);
-
+     clsDate(d,m,y) =  DateAfterNumOfDays(NOdayUntillDate,this->y);
     }
 
 
@@ -291,4 +289,4 @@ public:
 
 short  clsDate::d=0;
 short clsDate::m=0;
-short clsDate::y=0; 
+short clsDate::y=0;
