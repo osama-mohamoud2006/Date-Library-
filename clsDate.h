@@ -7,12 +7,12 @@ using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
     virtual string numberToText(int num)=0;
-    virtual  bool isLeap(short y)=0;
+    virtual   bool isLeap()=0;
     virtual short numberOFDays(short y)=0;
     virtual int numberOfHours(short y)=0;
     virtual  int numberOfMin(int y)=0;
     virtual int numberOfSeconds(int y)=0;
-    virtual  short NumberOfDaysInMonth(short y, short m)=0;
+    virtual  short NumberOfDaysInMonth()=0;
     virtual  int hoursInMonth(short y, short m)=0;
     virtual  int MinInMonth(short y, short m)=0;
     virtual  int secondsInMonth(short y, short m)=0;
@@ -43,12 +43,13 @@ public:
         this->m=m;
         this->y=y;
     }
+
     clsDate() {
 
     }
 
     clsDate(short  NumberOfDays, short Year ) {
-        DateAfterNumOfDays(NumberOfDays );
+       DateAfterNumOfDays(NumberOfDays,Year); // --> convert days to date
     }
 
 //p1
@@ -88,12 +89,13 @@ public:
     }
 
 //p2||3
- static   bool isLeap(short y)
+   static  bool isLeap(short y)
     {
         // if it divided by 400 --> leap
         // if it divided by 4 And not divided by 100 --> leap
         return ((y % 400 == 0)|| (y%4==0 && y%100!=0) );
     }
+
     bool isLeap() {
         return isLeap(this->y);
     }
@@ -242,40 +244,18 @@ public:
         return totalDays + d;
     }
 
-    static void DateAfterNumOfDays(short NOdayUntillDate,short year) {
-
-        // NOdayUntillDate is the number of days from 1/1 untill your day
-        short y =year;
-
-        // the year
-
-        short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
-        short m = 1;
-        while (true)
-        {
-            short monthDays = NumberOfDaysInMonth(y, m); // the num of days in month
-
-            if (RemainingDays > monthDays)
-            {
-                RemainingDays -= monthDays;
-                m++;
-            }
-            else
-            {
-                this->m = m;
-                this->d = RemainingDays;
-                break;
-            }
-        }
-
-    }
-    //convert number of days to real date ( affect on class)
-    void DateAfterNumOfDays(short NOdayUntillDate)
+     struct date
     {
-        // NOdayUntillDate is the number of days from 1/1 untill your day
-        short y =this->y;
+        short y;
+        short m;
+        short d;
+    };
 
-      // the year
+    static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
+
+        // NOdayUntillDate is the number of days from 1/1 untill your day
+        date data;
+        data.y = y; // the year
 
         short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
         short m = 1;
@@ -290,14 +270,18 @@ public:
             }
             else
             {
-                this->m = m;
-                this->d = RemainingDays;
+                data.m = m;
+                data.d = RemainingDays;
                 break;
             }
         }
-
+        return clsDate(data.d,data.m,data.y) ;
     }
 
+    //convert number of days to real date ( affect on class)
+    void DateAfterNumOfDays(short NOdayUntillDate) {
+        DateAfterNumOfDays(NOdayUntillDate,this->y);
+    }
 
 
 };
