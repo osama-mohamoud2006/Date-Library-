@@ -25,6 +25,8 @@ class clsDateFunctions {
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
+    virtual void TheYearAfterAddDays(short d)=0;
+
 
 
 
@@ -294,9 +296,8 @@ public:
     void DateAfterNumOfDays(short NOdayUntillDate) {
      clsDate(d,m,y) =  DateAfterNumOfDays(NOdayUntillDate,this->y);
     }
-
-
-    clsDate TheYearAfterAddDays(clsDate date, short d)
+    
+   static clsDate TheYearAfterAddDays(clsDate date, short d)
     {
         short RemainingDays = d + DayUntillDate(date); // total days
 
@@ -326,6 +327,9 @@ public:
         return clsDate(date.d,date.m , date.y);
     }
 
+    void TheYearAfterAddDays(short d) {
+        clsDate(d,m,y) = TheYearAfterAddDays(*this ,d);
+    }
 
 
 
