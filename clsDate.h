@@ -19,12 +19,12 @@ class clsDateFunctions {
     virtual  short NumberOfDaysInMonth()=0;
     virtual  int HoursInMonth()=0;
     virtual  int MinInMonth()=0;
-    virtual  int secondsInMonth(short y, short m)=0;
+    virtual  int secondsInMonth()=0;
      virtual string FullDate(short y, short m, short d)=0;
-    virtual short DayOrder(short year, short month, short day)=0;
-    virtual  string DayName(short dayOrder )=0;
-     virtual string monthName(short m)=0;
-     virtual void printMonthCalnder(short m, short y)=0;
+    virtual short DayOrder()=0;
+    virtual  string DayName( )=0;
+     virtual string monthName()=0;
+     virtual void printMonthCalnder()=0;
      virtual void PrintYearCalnder(short y)=0;
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate()=0;
@@ -165,32 +165,31 @@ public:
         return 60 * HoursInMonth(y, m);
     }
     int  MinInMonth() {
-        return MinInMonth(this->y , this->m); 
+        return MinInMonth(this->y , this->m);
     }
 
-
-    int secondsInMonth(short y, short m)
+    static  int secondsInMonth(short y, short m)
     {
         return MinInMonth(y, m) * 60;
     }
+    int secondsInMonth() {
+        return  secondsInMonth(this->y , this->m);
+    }
 
-    //7
+
     string FullDate(short y, short m, short d)
     {
         return (to_string(d) + "/" + to_string(m) + "/" + to_string(y));
     } // for functions
-// for object
     string FullDate( )
     {
         return (to_string(this->d) + "/" + to_string(this->m) + "/" + to_string(this->y));
-    }
-
-// for static
-    static  string fullDate(clsDate date) {
+    } // for object
+    static  string PrintFullDateForStatic(clsDate date) {
         return (to_string(date.d) + "/" + to_string(date.m) + "/" + to_string(date.y));
-    }
+    }// for static
 
-    short DayOrder(short year, short month, short day)
+   static  short DayOrder(short year, short month, short day)
     {
         short a = ((14 - month) / 12);
         short y = year - a;
@@ -198,18 +197,26 @@ public:
 
         return (day + y + ((y / 4)) - ((y / 100)) + ((y / 400)) + (((31 * m) / 12))) % 7;
     }
+    short DayOrder() {
+        return  DayOrder(this->y , this->m , this-> d);
+    }
 
-    string DayName(short dayOrder )
+   static  string DayName(short dayOrder )
     {
         string Day[]={"sun","mon","tue","wed","thu","fri","sat"};
         return Day[dayOrder];
     }
+    string DayName() {
+        return  DayName(this->d);
+    }
 
- //8 & 9
     string monthName(short m)
     {
         string month[] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "agu", "sep", "oct", "nov", "dec"};
         return month[m - 1];
+    }
+    string monthName() {
+        return    monthName(this->m);
     }
 
     void printMonthCalnder(short m, short y)
