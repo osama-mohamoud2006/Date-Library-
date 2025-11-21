@@ -15,7 +15,7 @@ int main() {
     // cout << clsDate::fullDate()<<endl ;
 
     clsDate d4(21,11,2025);
-d4.TheYearAfterAddDays( 41);
+d4.dateAfterAddingOneDay( );
     cout<<d4.FullDate();
 
 }

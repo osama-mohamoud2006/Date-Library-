@@ -26,6 +26,7 @@ class clsDateFunctions {
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
     virtual void TheYearAfterAddDays(short d)=0;
+    virtual  void dateAfterAddingOneDay( )=0;
 
 
 
@@ -332,8 +333,8 @@ public:
         clsDate(d,m,y) = TheYearAfterAddDays(*this ,d);
     }
 
-
-    static bool isDate1Longer (clsDate date , clsDate date2)
+// is date 1 less than date 2
+    static bool isDate1LessThanDate2 (clsDate date , clsDate date2)
     {
         return (date.y < date2.y) ? true :
                (date.y == date2.y) ?
@@ -344,8 +345,8 @@ public:
                : false;
     }
 
-    bool isDate1Longer(clsDate date2 ) {  // for object obj>d2
-        return isDate1Longer(*this ,date2);
+    bool isDate1LessThanDate2(clsDate date2 ) {  // for object obj>d2
+        return isDate1LessThanDate2(*this ,date2);
     }
 
     static bool isDate1equalsDate2(clsDate date, clsDate date2)
@@ -367,12 +368,51 @@ public:
         return isLastDayInMonth(*this);
     }
 
-    bool isLastMonthInYear(clsDate date)
+    static  bool isLastMonthInYear(clsDate date)
     {
         return (date.m == 12) ;
     }
 
+    bool isLastMonthInYear() {
+        return  isLastMonthInYear(*this);
+    }
 
+   static  clsDate dateAfterAddingOneDay(clsDate date)
+    {
+
+        if (isLastDayInMonth(date) == true)
+        {
+            date.d = 1; // rest day 1
+
+            if (isLastMonthInYear(date) == true) // 1/1
+            {
+                date.m = 1;
+                date.y = date.y + 1;
+            }
+            else date.m++;
+        }
+        else
+        {
+            date.d = date.d + 1;
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+
+    void dateAfterAddingOneDay() {
+        clsDate(d,m,y) = dateAfterAddingOneDay(*this);
+    }
+
+
+    static int diffBetween2days(stdate date1, stdate date2, bool endDay = false)
+    {
+        int days =0;
+        while (isDate1LessThanDate2(date1, date2))
+        {
+            days++;
+            date1=dateAfterAddingOneDay(date1);
+        }
+        return (endDay==false)? days : ++days;
+    }
 
 
 };
