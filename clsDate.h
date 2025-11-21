@@ -32,9 +32,9 @@ class clsDateFunctions {
 
 class clsDate : private clsDateFunctions  {
 private:
-    short y ;
-    short m;
-    short d;
+    static  short y ;
+   static short m;
+  static  short d;
 
 public:
     clsDate(short d , short m , short y) {
@@ -49,7 +49,8 @@ public:
     }
 
     clsDate(short  NumberOfDays, short Year ) {
-       DateAfterNumOfDays(NumberOfDays,Year); // --> convert days to date
+        date d1 = DateAfterNumOfDays(NumberOfDays,Year);
+        clsDate(d1.d,d1.m , d1.y); // --> convert days to date
     }
 
 //p1
@@ -251,7 +252,7 @@ public:
         short d;
     };
 
-    static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
+    static date DateAfterNumOfDays(short NOdayUntillDate,short y) {
 
         // NOdayUntillDate is the number of days from 1/1 untill your day
         date data;
@@ -275,15 +276,19 @@ public:
                 break;
             }
         }
-        return clsDate(data.d,data.m,data.y) ;
+        return data;
     }
 
     //convert number of days to real date ( affect on class)
     void DateAfterNumOfDays(short NOdayUntillDate) {
-        DateAfterNumOfDays(NOdayUntillDate,this->y);
+        date d1 = DateAfterNumOfDays(NOdayUntillDate,this->y);
+        clsDate(d1.d,d1.m , d1.y);
+
     }
 
 
 };
 
-
+short  clsDate::d=0;
+short clsDate::m=0;
+short clsDate::y=0; 
