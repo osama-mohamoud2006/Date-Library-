@@ -296,7 +296,7 @@ public:
     }
 
 
-    stdate TheYearAfterAddDays(clsDate date, short d)
+    clsDate TheYearAfterAddDays(clsDate date, short d)
     {
         short RemainingDays = d + DayUntillDate(date); // total days
 
@@ -323,8 +323,11 @@ public:
                 break;
             }
         }
-        return date;
+        return clsDate(date.d,date.m , date.y);
     }
+
+
+
 
 };
 

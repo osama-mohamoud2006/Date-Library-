@@ -11,8 +11,11 @@ int main() {
 
     //cout<<d2.FullDate()<<endl;
 
-    clsDate::DateAfterNumOfDays(325,2025);
-    cout << clsDate::fullDate()<<endl ;
+    // clsDate::DateAfterNumOfDays(325,2025);
+    // cout << clsDate::fullDate()<<endl ;
 
+    clsDate d4(21,11,2025);
+d4.TheYearAfterAddDays(d4 , 41);
+    cout<<d4.FullDate();
 
 }
