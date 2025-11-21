@@ -24,14 +24,27 @@ class clsDateFunctions {
      virtual void PrintYearCalnder(short y)=0;
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate(short y, short m, short d)=0;
-  virtual  ReturnDate(short NOdayUntillDate, short y)=0;
+ // virtual clsDateFunctions DateAfterNumOfDays(short NOdayUntillDate, short y)=0;
 
 
 
 };
 
 class clsDate : private clsDateFunctions  {
+private:
+    short y ;
+    short m;
+    short d;
 
+public:
+    clsDate(short d , short m , short y) {
+        this->d=d;
+        this->m=m;
+        this->y=y;
+    }
+    clsDate() {
+
+    }
 //p1
     string numberToText(int num)
     {
@@ -211,17 +224,10 @@ class clsDate : private clsDateFunctions  {
         return totalDays + d;
     }
 
-    struct date
-    {
-        short y;
-        short m;
-        short d;
-    };
-
-    date ReturnDate(short NOdayUntillDate, short y)
+    clsDate DateAfterNumOfDays(short NOdayUntillDate, short y)
     {
         // NOdayUntillDate is the number of days from 1/1 untill your day
-        date data;
+        clsDate data;
         data.y = y; // the year
 
         short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
@@ -242,7 +248,7 @@ class clsDate : private clsDateFunctions  {
                 break;
             }
         }
-        return data ;
+        return clsDate(d,m,y) ;
     }
 
 
