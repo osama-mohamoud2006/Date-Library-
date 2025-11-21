@@ -13,12 +13,12 @@ using namespace  std;
 class clsDateFunctions {
     virtual   bool isLeap()=0;
     virtual short numberOFDays()=0;
-    virtual int numberOfHours()=0;
-    virtual  int numberOfMin()=0;
-    virtual int numberOfSeconds()=0;
+    virtual int NumberOfHours()=0;
+    virtual  int NumberOfMin()=0;
+    virtual int NumberOfSeconds()=0;
     virtual  short NumberOfDaysInMonth()=0;
-    virtual  int hoursInMonth(short y, short m)=0;
-    virtual  int MinInMonth(short y, short m)=0;
+    virtual  int HoursInMonth()=0;
+    virtual  int MinInMonth()=0;
     virtual  int secondsInMonth(short y, short m)=0;
      virtual string FullDate(short y, short m, short d)=0;
     virtual short DayOrder(short year, short month, short day)=0;
@@ -113,27 +113,33 @@ public:
         return (isLeap(y) == true) ? 366 : 365;
     } // number of days  in year
     short numberOFDays() {
-        return short numberOFDays(this->y);
+        return numberOFDays(this->y);
     }
-    static int numberOfHours(short y)
+
+    static int NumberOfHours(short y)
     {
         return 24 * numberOFDays(y);
     }
+    int NumberOfHours() {
+        return NumberOfHours(this->y);
+    }
 
-   static  int numberOfMin(int y)
+   static  int NumberOfMin(int y)
     {
-        return numberOfHours(y) * 60;
+        return NumberOfHours(y) * 60;
     }
-    int  numberOfMin() {
-        return numberOfMin(this->y);
+    int  NumberOfMin() {
+        return NumberOfMin(this->y);
     }
 
-    int numberOfSeconds(int y)
+    static  int NumberOfSeconds(int y)
     {
-        return numberOfMin(y) * 60;
+        return NumberOfMin(y) * 60;
+    }
+    int NumberOfSeconds() {
+        return NumberOfSeconds(this->y);
     }
 
-    //5 &6
  static  short NumberOfDaysInMonth(short y, short m){
 
         if (m<1 || 12<m) return 0;
@@ -142,20 +148,26 @@ public:
         short arr[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
         return  (m==2)?((isLeap(y)==true)?  29 : 28):arr[m];
     }
-
     short NumberOfDaysInMonth() {
         return NumberOfDaysInMonth(this->y, this->m);
     }
 
-    int hoursInMonth(short y, short m)
+    static  int HoursInMonth(short y, short m)
     {
         return 24 * NumberOfDaysInMonth(y, m);
     }
-
-    int MinInMonth(short y, short m)
-    {
-        return 60 * hoursInMonth(y, m);
+    int HoursInMonth() {
+        return HoursInMonth(this->y , this->m);
     }
+
+    static int MinInMonth(short y, short m)
+    {
+        return 60 * HoursInMonth(y, m);
+    }
+    int  MinInMonth() {
+        return MinInMonth(this->y , this->m); 
+    }
+
 
     int secondsInMonth(short y, short m)
     {
