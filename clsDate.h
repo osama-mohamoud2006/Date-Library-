@@ -26,6 +26,7 @@ class clsDateFunctions {
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
     virtual void TheYearAfterAddDays(short d)=0;
+   // virtual bool isDate1Longer()=0;
 
 
 
@@ -296,7 +297,7 @@ public:
     void DateAfterNumOfDays(short NOdayUntillDate) {
      clsDate(d,m,y) =  DateAfterNumOfDays(NOdayUntillDate,this->y);
     }
-    
+
    static clsDate TheYearAfterAddDays(clsDate date, short d)
     {
         short RemainingDays = d + DayUntillDate(date); // total days
@@ -330,6 +331,33 @@ public:
     void TheYearAfterAddDays(short d) {
         clsDate(d,m,y) = TheYearAfterAddDays(*this ,d);
     }
+
+
+    static bool isDate1Longer (clsDate date , clsDate date2)
+    {
+        return (date.y < date2.y) ? true :
+               (date.y == date2.y) ?
+                 (date.m < date2.m) ? true :
+                 (date.m == date2.m) ?
+                   (date.d < date2.d) ? true : false
+                 : false
+               : false;
+    }
+
+    bool isDate1Longer(clsDate date2 ) {  // for object obj>d2
+        return isDate1Longer(*this ,date2);
+    }
+
+    static bool isDate1equalsDate2(clsDate date, clsDate date2)
+    {
+        return ((date.y == date2.y) && (date.m == date2.m) && (date.d == date2.d));
+    }
+
+    bool isDate1equalsDate2(clsDate date2) { // for object 
+        return isDate1equalsDate2( *this ,  date2);
+    }
+
+
 
 
 
