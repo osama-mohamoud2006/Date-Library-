@@ -12,10 +12,10 @@ using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
     virtual   bool isLeap()=0;
-    virtual short numberOFDays(short y)=0;
-    virtual int numberOfHours(short y)=0;
-    virtual  int numberOfMin(int y)=0;
-    virtual int numberOfSeconds(int y)=0;
+    virtual short numberOFDays()=0;
+    virtual int numberOfHours()=0;
+    virtual  int numberOfMin()=0;
+    virtual int numberOfSeconds()=0;
     virtual  short NumberOfDaysInMonth()=0;
     virtual  int hoursInMonth(short y, short m)=0;
     virtual  int MinInMonth(short y, short m)=0;
@@ -42,28 +42,26 @@ private:
      short d;
 
 public:
-    //take the local time 
+
     clsDate() {
        *this =  CurrentLocalDate(); // make the current object have all data of this clsDate function
-    }
-
+    } //take the local time
     clsDate(string FullDate ) {
         clsString::SetDelmi("/");
       vector<string > date = clsString::SplitString(FullDate);
         *this =clsDate( (short)stoi(date.at(0) ) , (short)stoi( date.at(1) ) , (short)stoi(date.at(2)));
-    }
+    } //take the date as single string "d/m/y"
     clsDate(short d , short m , short y) {
         if (d>NumberOfDaysInMonth(y,m)) d=NumberOfDaysInMonth(y,m); // if user entered day bigger than actual days in month
           if (m>12) m=12;
         this->d=d;
         this->m=m;
         this->y=y;
-    }
+    } //take d , m , y
     clsDate(short  NumberOfDays, short Year ) {
        *this =  DateAfterNumOfDays(NumberOfDays,Year); // --> convert days to date
 
-    }
-
+    } //number of days passed in the year and the year will return full date
 
     static string numberToText(int num)
     {
@@ -100,7 +98,6 @@ public:
         }
     }
 
-
    static  bool isLeap(short y)
     {
         // if it divided by 400 --> leap
@@ -111,20 +108,24 @@ public:
         return isLeap(this->y);
     }
 
-// 4
-    short numberOFDays(short y)
+    static short numberOFDays(short y)
     {
         return (isLeap(y) == true) ? 366 : 365;
     } // number of days  in year
-
-    int numberOfHours(short y)
+    short numberOFDays() {
+        return short numberOFDays(this->y);
+    }
+    static int numberOfHours(short y)
     {
         return 24 * numberOFDays(y);
     }
 
-    int numberOfMin(int y)
+   static  int numberOfMin(int y)
     {
         return numberOfHours(y) * 60;
+    }
+    int  numberOfMin() {
+        return numberOfMin(this->y);
     }
 
     int numberOfSeconds(int y)
