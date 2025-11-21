@@ -23,9 +23,9 @@ class clsDateFunctions {
      virtual string FullDate(short y, short m, short d)=0;
     virtual short DayOrder()=0;
     virtual  string DayName( )=0;
-     virtual string monthName()=0;
+     virtual string MonthName()=0;
      virtual void printMonthCalnder()=0;
-     virtual void PrintYearCalnder(short y)=0;
+     virtual void PrintYearCalnder()=0;
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
@@ -210,21 +210,21 @@ public:
         return  DayName(this->d);
     }
 
-    string monthName(short m)
+    static string MonthName(short m)
     {
         string month[] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "agu", "sep", "oct", "nov", "dec"};
         return month[m - 1];
     }
-    string monthName() {
-        return    monthName(this->m);
+    string MonthName() override {
+        return    MonthName(this->m);
     }
 
-    void printMonthCalnder(short m, short y)
+    static void printMonthCalnder(short m, short y)
     {
         int theLastDayInMonth = NumberOfDaysInMonth(y, m); // the last day
         int currentDay = DayOrder(y, m, 1);
 
-        cout << "\n______________" << monthName(m) << "______________" << endl;
+        cout << "\n______________" << MonthName(m) << "______________" << endl;
 
         printf(" Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
 
@@ -242,8 +242,11 @@ public:
         printf("\n");
 
     }
+    void printMonthCalnder() override  {
+        printMonthCalnder(this->m, this->y);
+    }
 
-    void PrintYearCalnder(short y)
+    static void PrintYearCalnder(short y)
     {
         for (short i = 1; i <= 12; i++)
         {
@@ -252,8 +255,10 @@ public:
         }
 
     }
+    void PrintYearCalnder() {
+         PrintYearCalnder(this->y);
+    }
 
-    //10
     int TotalDaysSinceTheD(short y, short m, short d)
     {
         int totalDaysInMonths = 0;
