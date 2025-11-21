@@ -28,8 +28,8 @@ class clsDateFunctions {
      virtual void PrintYearCalnder()=0;
     virtual int TotalDaysSinceThisDate()=0;
     virtual short DayUntillDate()=0;
-  virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
-    virtual void TheYearAfterAddDays(short d)=0;
+  virtual void GetDateFromDayOfYear(short NOdayUntillDate)=0;
+    virtual void AddDaysToDate(short d)=0;
     virtual  void dateAfterAddingOneDay( )=0;
 
 
@@ -59,7 +59,7 @@ public:
         this->y=y;
     } //take d , m , y
     clsDate(short  NumberOfDays, short Year ) {
-       *this =  DateAfterNumOfDays(NumberOfDays,Year); // --> convert days to date
+       *this =  GetDateFromDayOfYear(NumberOfDays,Year); // --> convert days to date
 
     } //number of days passed in the year and the year will return full date
 
@@ -299,13 +299,14 @@ private : struct Stdate
     };
    //_______________________________________________________________________________//
 public:
-    static clsDate DateAfterNumOfDays(short NOdayUntillDate,short y) {
+
+    static clsDate GetDateFromDayOfYear(short NunOfdaysUntillDate,short y) {
 
         // NOdayUntillDate is the number of days from 1/1 untill your day
         Stdate data;
         data.y = y; // the year
 
-        short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
+        short RemainingDays = NunOfdaysUntillDate; // will increment it to get the no.of days
         short m = 1;
         while (true)
         {
@@ -325,11 +326,11 @@ public:
         }
         return clsDate(data.d,data.m,data.y);
     }
-    void DateAfterNumOfDays(short NOdayUntillDate) {
-      *this =  DateAfterNumOfDays(NOdayUntillDate,this->y);
+    void GetDateFromDayOfYear(short NumOFDaysUntillDate) {
+      *this =  GetDateFromDayOfYear(NumOFDaysUntillDate,this->y);
     }//convert number of days to real date ( affect on current object)
 
-   static clsDate TheYearAfterAddDays(clsDate date, short d)
+   static clsDate AddDaysToDate(clsDate date, short d)
     {
         short RemainingDays = d + DayUntillDate(date); // total days
 
@@ -356,12 +357,12 @@ public:
                 break;
             }
         }
-        return clsDate(date.d,date.m , date.y);
+        return clsDate(date.d, date.m , date.y);
     }
-    void TheYearAfterAddDays(short d) override {
-       *this = TheYearAfterAddDays(*this ,d);
+    void AddDaysToDate(short d) override {
+       *this = AddDaysToDate(*this ,d);
     }
-
+---------------------------
 // is date 1 less than date 2
     static bool isDate1LessThanDate2 (clsDate date , clsDate date2)
     {
