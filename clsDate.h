@@ -15,8 +15,8 @@ class clsDateFunctions {
      virtual string FullDate(short y, short m, short d)=0;
     virtual short DayOrder(short year, short month, short day)=0;
     virtual  string DayName(short dayOrder )=0;
-
-
+     virtual string monthName(short m)=0;
+    virtual void printMonthCalnder(short m, short y)=0;
 
 };
 
@@ -133,7 +133,36 @@ class clsDate : private clsDateFunctions  {
         return Day[dayOrder];
     }
 
-    
+ //8
+    string monthName(short m)
+    {
+        string month[] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "agu", "sep", "oct", "nov", "dec"};
+        return month[m - 1];
+    }
+
+    void printMonthCalnder(short m, short y)
+    {
+        int theLastDayInMonth = NumberOfDaysInMonth(y, m); // the last day
+        int currentDay = DayOrder(y, m, 1);
+
+        cout << "\n______________" << monthName(m) << "______________" << endl;
+
+        printf(" Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+
+        for (int i = 0; i < currentDay; i++)
+        {
+            printf("     ");
+        }
+
+        for (int d = 1; d <= theLastDayInMonth; d++)
+        {
+            printf("%4d ", d);
+            if ((d + currentDay) % 7 == 0)
+                printf("\n");
+        }
+        printf("\n");
+
+    }
 
 };
 
