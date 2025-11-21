@@ -1,4 +1,8 @@
-#include<iostream>
+#pragma once
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <stdio.h>
 using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
@@ -16,7 +20,13 @@ class clsDateFunctions {
     virtual short DayOrder(short year, short month, short day)=0;
     virtual  string DayName(short dayOrder )=0;
      virtual string monthName(short m)=0;
-    virtual void printMonthCalnder(short m, short y)=0;
+     virtual void printMonthCalnder(short m, short y)=0;
+     virtual void PrintYearCalnder(short y)=0;
+    virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
+    virtual short DayUntillDate(short y, short m, short d)=0;
+  virtual  ReturnDate(short NOdayUntillDate, short y)=0;
+
+
 
 };
 
@@ -133,7 +143,7 @@ class clsDate : private clsDateFunctions  {
         return Day[dayOrder];
     }
 
- //8
+ //8 & 9
     string monthName(short m)
     {
         string month[] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "agu", "sep", "oct", "nov", "dec"};
@@ -163,6 +173,79 @@ class clsDate : private clsDateFunctions  {
         printf("\n");
 
     }
+
+    void PrintYearCalnder(short y)
+    {
+        for (short i = 1; i <= 12; i++)
+        {
+            printMonthCalnder(i,y); // print the month
+            cout<<endl;
+        }
+
+    }
+
+    //10
+    int TotalDaysSinceTheD(short y, short m, short d)
+    {
+        int totalDaysInMonths = 0;
+
+        for (int i = 1; i <= m-1; i++)
+        {
+            totalDaysInMonths += NumberOfDaysInMonth(y, i); // count the total days untill the current month
+        }
+
+        // int the_rest_days_in_month = NumberOfDaysInMonth(y, m) - d;
+
+        return totalDaysInMonths += d;
+    } //Number of days from begining of the year is
+
+//11
+    short DayUntillDate(short y, short m, short d)
+    {
+        short totalDays = 0;
+
+        for (short i = 1; i <= m - 1; i++)
+        {
+            totalDays += NumberOfDaysInMonth(y, i);
+        }
+        return totalDays + d;
+    }
+
+    struct date
+    {
+        short y;
+        short m;
+        short d;
+    };
+
+    date ReturnDate(short NOdayUntillDate, short y)
+    {
+        // NOdayUntillDate is the number of days from 1/1 untill your day
+        date data;
+        data.y = y; // the year
+
+        short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
+        short m = 1;
+        while (true)
+        {
+            short monthDays = NumberOfDaysInMonth(y, m); // the num of days in month
+
+            if (RemainingDays > monthDays)
+            {
+                RemainingDays -= monthDays;
+                m++;
+            }
+            else
+            {
+                data.m = m;
+                data.d = RemainingDays;
+                break;
+            }
+        }
+        return data ;
+    }
+
+
 
 };
 
