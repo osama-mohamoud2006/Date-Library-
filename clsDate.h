@@ -26,7 +26,7 @@ class clsDateFunctions {
     virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
     virtual void TheYearAfterAddDays(short d)=0;
-   // virtual bool isDate1Longer()=0;
+
 
 
 
@@ -353,10 +353,24 @@ public:
         return ((date.y == date2.y) && (date.m == date2.m) && (date.d == date2.d));
     }
 
-    bool isDate1equalsDate2(clsDate date2) { // for object 
+    bool isDate1equalsDate2(clsDate date2) { // for object
         return isDate1equalsDate2( *this ,  date2);
     }
 
+
+    static bool isLastDayInMonth(clsDate date)
+    {
+        return (NumberOfDaysInMonth(date.y, date.m) == date.d);
+    }
+
+    bool isLastDayInMonth() {
+        return isLastDayInMonth(*this);
+    }
+
+    bool isLastMonthInYear(clsDate date)
+    {
+        return (date.m == 12) ;
+    }
 
 
 
