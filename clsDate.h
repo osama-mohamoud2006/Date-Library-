@@ -46,7 +46,11 @@ public:
     clsDate() {
 
     }
-    void GetFullDate(){}
+
+    clsDate(short  NumberOfDays, short Year ) {
+        DateAfterNumOfDays(NumberOfDays );
+    }
+
 //p1
     string numberToText(int num)
     {
@@ -84,11 +88,14 @@ public:
     }
 
 //p2||3
-    bool isLeap(short y)
+ static   bool isLeap(short y)
     {
         // if it divided by 400 --> leap
         // if it divided by 4 And not divided by 100 --> leap
         return ((y % 400 == 0)|| (y%4==0 && y%100!=0) );
+    }
+    bool isLeap() {
+        return isLeap(this->y);
     }
 
 // 4
@@ -113,13 +120,17 @@ public:
     }
 
     //5 &6
-    short NumberOfDaysInMonth(short y, short m){
+ static  short NumberOfDaysInMonth(short y, short m){
 
         if (m<1 || 12<m) return 0;
         // return (m==2)?((isLeap(y)==true)?  29 : 28) : (m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12) ? 31 : 30;
 
         short arr[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
         return  (m==2)?((isLeap(y)==true)?  29 : 28):arr[m];
+    }
+
+    short NumberOfDaysInMonth() {
+        return NumberOfDaysInMonth(this->y, this->m);
     }
 
     int hoursInMonth(short y, short m)
@@ -231,6 +242,34 @@ public:
         return totalDays + d;
     }
 
+    static void DateAfterNumOfDays(short NOdayUntillDate,short year) {
+
+        // NOdayUntillDate is the number of days from 1/1 untill your day
+        short y =year;
+
+        // the year
+
+        short RemainingDays = NOdayUntillDate; // will increment it to get the no.of days
+        short m = 1;
+        while (true)
+        {
+            short monthDays = NumberOfDaysInMonth(y, m); // the num of days in month
+
+            if (RemainingDays > monthDays)
+            {
+                RemainingDays -= monthDays;
+                m++;
+            }
+            else
+            {
+                this->m = m;
+                this->d = RemainingDays;
+                break;
+            }
+        }
+
+    }
+    //convert number of days to real date ( affect on class)
     void DateAfterNumOfDays(short NOdayUntillDate)
     {
         // NOdayUntillDate is the number of days from 1/1 untill your day
