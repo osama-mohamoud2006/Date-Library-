@@ -23,9 +23,9 @@ class clsDateFunctions {
      virtual void printMonthCalnder(short m, short y)=0;
      virtual void PrintYearCalnder(short y)=0;
     virtual int TotalDaysSinceTheD(short y, short m, short d)=0;
-    virtual short DayUntillDate(short y, short m, short d)=0;
+    virtual short DayUntillDate()=0;
   virtual void DateAfterNumOfDays(short NOdayUntillDate)=0;
-    virtual
+
 
 
 
@@ -240,15 +240,20 @@ public:
     } //Number of days from begining of the year is
 
 //11
-    short DayUntillDate(short y, short m, short d)
+    static short DayUntillDate(clsDate d)
     {
         short totalDays = 0;
 
-        for (short i = 1; i <= m - 1; i++)
+        for (short i = 1; i <= d.m - 1; i++)
         {
-            totalDays += NumberOfDaysInMonth(y, i);
+            totalDays += NumberOfDaysInMonth(d.y, i);
         }
-        return totalDays + d;
+        return totalDays + d.d;
+    }
+
+     short DayUntillDate()
+    {
+     return DayUntillDate(*this);
     }
 
     struct date
