@@ -6,6 +6,7 @@
 #include <cmath>
 #include <ctime>
 #include <stdio.h>
+class clsDate;
 using namespace  std;
 // Abstract class(contract)
 class clsDateFunctions {
@@ -32,10 +33,6 @@ class clsDateFunctions {
     virtual  void dateAfterAddingOneDay( )=0;
 
 
-
-
-
-
 };
 
 class clsDate : private clsDateFunctions  {
@@ -51,6 +48,7 @@ public:
 
     clsDate(short d , short m , short y) {
         if (d>NumberOfDaysInMonth(y,m)) d=NumberOfDaysInMonth(y,m); // if user entered day bigger than actual days in month
+          if (m>12) m=12;
         this->d=d;
         this->m=m;
         this->y=y;
@@ -405,19 +403,42 @@ public:
         clsDate(d,m,y) = dateAfterAddingOneDay(*this);
     }
 
-
-    static int diffBetween2days(clsDate date1, clsDate date2, bool endDay = false)
+    static void swapDates(clsDate &date1, clsDate &date2)
     {
-        int days =0;
+        clsDate temp;
+        temp.d = date1.d;
+        temp.m = date1.m;
+        temp.y = date1.y;
+
+        date1.d = date2.d;
+        date1.m = date2.m;
+        date1.y = date2.y;
+
+        date2.d = temp.d;
+        date2.m = temp.m;
+        date2.y = temp.y;
+    }
+
+    static int DiffBetween2DatesInDays(clsDate date1, clsDate date2, bool endDay = false)
+    {
+        int FlagedAsD1IsnotLessD2 = 1;
+        int days = 0;
+
+        if (!isDate1LessThanDate2(date1, date2))
+        {
+            swapDates(date1, date2);
+            FlagedAsD1IsnotLessD2 = -1;
+        }
         while (isDate1LessThanDate2(date1, date2))
         {
             days++;
-            date1=dateAfterAddingOneDay(date1);
+            date1 = dateAfterAddingOneDay(date1);
         }
-        return (endDay==false)? days : ++days;
+        return days * FlagedAsD1IsnotLessD2;
     }
-     int diffBetween2days(clsDate date2, bool endDay = false) {
-        return diffBetween2days(*this , date2 , endDay);
+
+     int DiffBetween2DatesInDays(clsDate date2, bool endDay = false) {
+        return DiffBetween2DatesInDays(*this , date2 , endDay);
     }
 
 
@@ -448,6 +469,7 @@ public:
     int yourAgeInDays(clsDate BirthdayObj ) {
         return yourAgeInDays(BirthdayObj, *this );
     }
+
 
 };
 
