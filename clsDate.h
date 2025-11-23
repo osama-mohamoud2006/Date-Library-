@@ -425,7 +425,7 @@ public:
     void dateAfterAddingOneDay() {
        *this =  dateAfterAddingOneDay(*this);
     }
-    
+
     static void swapDates(clsDate &date1, clsDate &date2)
     {
         clsDate temp;
@@ -492,6 +492,141 @@ public:
 
     // start from 20 to 32 .cpp
    // start from add x days ()
+    static clsDate AddXdays(short days, clsDate date)
+    {
+        for (int i = 1; i <= days; i++)
+        {
+            date = dateAfterAddingOneDay(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddXdays(short days) {
+        *this =  AddXdays(days,*this );
+    }
+
+    static  clsDate AddOneWeek(clsDate date)
+    {
+        for (int i = 1; i <= 7; i++)
+        {
+            date = dateAfterAddingOneDay(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddOneWeek() {
+       *this =  AddOneWeek(*this);
+    }
+
+    static clsDate AddXWeeks(short x, clsDate date)
+    {
+        for (int i = 1; i <= x; i++)
+        {
+            date = AddOneWeek(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddXWeeks(short x) {
+        *this = AddXWeeks(x,*this);
+    }
+
+
+    static  clsDate AddOneMonth(clsDate date)
+    {
+        if (isLastMonthInYear(date))
+        {
+            date.y++;
+            date.m = 1;
+        }
+        else
+        {
+            date.m++;
+        }
+        // if the days exceed the actual days in month
+        // ex: 31/1 --> 31/2 (fatal mistake)
+        // 31 > 28 ||29 , so will make the days the number of total days in month
+        short ActualDaysInMonth = NumberOfDaysInMonth(date.y, date.m);
+        if (date.d > ActualDaysInMonth)
+        {
+            date.d=ActualDaysInMonth ;
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddOneMonth() {
+        *this = AddOneMonth(*this);
+    }
+
+    static clsDate AddXMonths(short x, clsDate date)
+    {
+        for (int i = 1; i <= x; i++)
+        {
+            date = AddOneMonth(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void  AddXMonths(short x) {
+        *this = AddXMonths(x,*this);
+    }
+
+   static clsDate AddOneYear(clsDate date)
+    {
+        date.y++;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void  AddOneYear() {
+        *this = AddOneYear(*this);
+    }
+
+    static  clsDate AddXYears(short x, clsDate date)
+    {
+        for (int i = 1; i <= x; i++)
+        {
+            date = AddOneYear(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddXYears(short x) {
+        *this = AddXYears(x,*this);
+    }
+
+    static  clsDate AddOneDecade(clsDate date)
+    {
+        date.y += 10;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddOneDecade() {
+        *this = AddOneDecade(*this);
+    }
+
+   static clsDate AdddXDecade(short x, clsDate date)
+    {
+        for (int i = 1; i <= x; i++)
+        {
+            date = AddOneDecade(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AdddXDecade(short x) {
+        *this = AdddXDecade(x,*this);
+    }
+
+   static  clsDate AddOneCentury(clsDate date)
+    {
+        date.y += 100;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddOneCentury() {
+        *this = AddOneCentury(*this);
+    }
+
+    static clsDate AddOneMillenuim(clsDate date)
+    {
+        date.y += 1000;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void AddOneMillenuim() {
+        *this = AddOneMillenuim(*this);
+    }
+
+    // 33 -> 46
 
 };
 

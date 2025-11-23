@@ -35,15 +35,25 @@ int main() {
 // cout<<"\n__________________\n";
 //     cout<<"The Date1 after swap: "<<d7.FullDate()<<endl;
 //     cout<<"Date after swap  is: "<<d6.FullDate()<<endl;
+    //
+    //
+    // clsDate d = clsDate(325,2025);
+    // cout<<d.FullDate()<<endl;
+    // d.dateAfterAddingOneDay();
+    // cout<<d.FullDate()<<endl;
+    //  clsDate d6(3,10,2000);
+    // cout<< "The diff is: "<<d.DiffBetween2DatesInDays(d6 );
+clsDate d4;
+   // d4.AddOneWeek();
+    d4.AddOneMonth();
+   // clsDate::AddOneMonth(d4);
+    //cout<<clsDate::PrintFullDateForStatic(d4)<<endl;
+
+    cout<<d4.FullDate()<<endl;
 
 
-    clsDate d = clsDate(325,2025);
-    cout<<d.FullDate()<<endl;
-    d.dateAfterAddingOneDay();
-    cout<<d.FullDate()<<endl;
-     clsDate d6(3,10,2000);
-    cout<< "The diff is: "<<d.DiffBetween2DatesInDays(d6,true );
 
+    //cout<< clsDate::PrintFullDateForStatic(clsDate::AddXdays(2,d4));
 
 
 
