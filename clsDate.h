@@ -35,7 +35,7 @@ class clsDateFunctions {
 
 };
 
-class clsDate : private clsDateFunctions  {
+class clsDate : public clsDateFunctions  {
 private:
       short y ;
      short m;
@@ -62,6 +62,18 @@ public:
        *this =  GetDateFromDayOfYear(NumberOfDays,Year); // --> convert days to date
 
     } //number of days passed in the year and the year will return full date
+
+    //set
+    void SetD(short d) {
+        this-> d= d;
+    }
+    void SetM(short m) {
+        this->m = m;
+    }
+    void SetY(short y) {
+        this-> y= y;
+    }
+
 
     static string numberToText(int num)
     {
@@ -749,10 +761,12 @@ public:
         {
             date = DecreaseOneYear(date);
         }
-        return clsDate(date.d,date.m,date.y);
+       return clsDate(date.d,date.m,date.y);
+
     }
     void DecreaseXYears(short x) {
         *this = DecreaseXYears(x,*this);
+
     }
 
    static  clsDate DecreaseOneDecade(clsDate date)
@@ -785,7 +799,7 @@ void DecreaseXdecades(short x = 10) {
         *this = DecreaseOneCentury(*this);
     }
 
-    clsDate DecreaseOneMillenum(clsDate date)
+    static  clsDate DecreaseOneMillenum(clsDate date)
     {
         date.y -= 1000;
         return clsDate(date.d,date.m,date.y);
@@ -793,7 +807,7 @@ void DecreaseXdecades(short x = 10) {
     void DecreaseOneMillenum() {
         *this = DecreaseOneMillenum(*this);
     }
-    
+
 
 
 };

@@ -19,13 +19,22 @@ int main() {
 // d4.dateAfterAddingOneDay( );
 //     cout<<d4.FullDate();
 
-    // stdate DATETODAY = CURRENTLOCALTIME();
-    // cout<<DATETODAY.d<<" / "<<DATETODAY.m<<" / "<<DATETODAY.y<<endl;
-    // clsDate MYBIRTHDAY (1,8,2006);
-    // clsDate d6(3,10,2000);
+
+    //clsDate MYBIRTHDAY (1,8,2006);
+   // clsDate d6(3,10,2000);
 
     // cout<<"Birthday is: "<<MYBIRTHDAY.FullDate()<<endl;
     // cout<<"So i lived for: "<<d6.yourAgeInDays(MYBIRTHDAY)<<endl;
+
+   // clsDate d1 = clsDate::GetCurrentLocalDate();
+
+    // clsDate d2 ;// call the conctructor
+    // d2 = clsDate::AddDaysToDate(d2,2); // make temp effect on object
+    //
+    // cout<<d2.FullDate()<<endl; //
+
+ // أنت عايز بس "تعرف" التاريخ، مش عايز تغير تاريخ ميلادك الحقيقي
+
 //
 //     clsDate d7;
 //     cout<<"The Date1 before swap: "<<d7.FullDate()<<endl;
@@ -43,13 +52,22 @@ int main() {
     // cout<<d.FullDate()<<endl;
     //  clsDate d6(3,10,2000);
     // cout<< "The diff is: "<<d.DiffBetween2DatesInDays(d6 );
-clsDate d4;
+// clsDate d4;
+//   clsDate::AddOneWeek(d4);
+//         cout<< clsDate::PrintFullDateForStatic(d4)<<endl;
    // d4.AddOneWeek();
-    d4.AddOneMonth();
+
    // clsDate::AddOneMonth(d4);
     //cout<<clsDate::PrintFullDateForStatic(d4)<<endl;
 
-    cout<<d4.FullDate()<<endl;
+
+clsDate d1 ;
+    d1= clsDate::DecreaseXYears(2,d1);
+    cout<<d1.FullDate()<<endl;
+
+
+
+
 
 
 
