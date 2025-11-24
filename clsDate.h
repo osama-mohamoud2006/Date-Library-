@@ -734,7 +734,7 @@ public:
         *this = DecreaseXMonth(x,*this);
     }
 
-    clsDate DecreaseOneYear(clsDate date)
+    static clsDate DecreaseOneYear(clsDate date)
     {
         date.y--;
         return clsDate(date.d,date.m,date.y);
@@ -743,11 +743,57 @@ public:
         *this = DecreaseOneYear(*this);
     }
 
+    static clsDate DecreaseXYears(short x, clsDate date)
+    {
+        for (short i = 1; i <= x; i++)
+        {
+            date = DecreaseOneYear(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseXYears(short x) {
+        *this = DecreaseXYears(x,*this);
+    }
+
+   static  clsDate DecreaseOneDecade(clsDate date)
+    {
+        date.y -= 10;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneDecade() {
+        *this = DecreaseOneDecade(*this);
+    }
+
+ static  clsDate DecreaseXdecades(clsDate date, short x = 10)
+    {
+        for (short i = 1; i <= x; i++)
+        {
+            date = DecreaseOneDecade(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+void DecreaseXdecades(short x = 10) {
+        *this = DecreaseXdecades(*this , x);
+    }
+
+   static clsDate DecreaseOneCentury(clsDate date)
+    {
+        date.y -= 100;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneCentury() {
+        *this = DecreaseOneCentury(*this);
+    }
+
+    clsDate DecreaseOneMillenum(clsDate date)
+    {
+        date.y -= 1000;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneMillenum() {
+        *this = DecreaseOneMillenum(*this);
+    }
     
-
-
-
-
 
 
 };
