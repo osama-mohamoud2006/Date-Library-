@@ -675,7 +675,80 @@ public:
     void  DecreaseXDays(short x) {
         *this = DecreaseXDays(x,*this);
     }
+
+    static clsDate DecreaseOneWeek(clsDate date)
+    {
+        for (int i = 1; i <= 7; i++)
+        {
+            date = DecreaseOneDay(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneWeek() {
+        *this = DecreaseOneWeek(*this);
+    }
+
+    static  clsDate DecreaseXWeeks(short x, clsDate date)
+    {
+        for (int i = 1; i <= x; i++)
+        {
+            date = DecreaseOneWeek(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseXWeeks(short x) {
+        *this = DecreaseXWeeks(x,*this);
+    }
+
+    static clsDate DecreaseOneMonth(clsDate date)
+    {
+        if (isFirstMonthInTheYear(date))
+        {                // 1/1/2022 --> 1/12/2021
+            date.y--;    // 2021
+            date.m = 12; // 12
+            return clsDate(date.d,date.m,date.y);
+        }
+        else
+        {
+            date.m--;
+        }
+        short DaysInMonth = NumberOfDaysInMonth(date.y, date.m);
+        if (date.d > DaysInMonth)
+        {
+            date.d = DaysInMonth;
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneMonth() {
+        *this = DecreaseOneMonth(*this);
+    }
+
+    static clsDate DecreaseXMonth(short x, clsDate date) {
+        for (short i = 1; i <= x; i++)
+        {
+            date = DecreaseOneMonth(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseXMonth(short x) {
+        *this = DecreaseXMonth(x,*this);
+    }
+
+    clsDate DecreaseOneYear(clsDate date)
+    {
+        date.y--;
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneYear() {
+        *this = DecreaseOneYear(*this);
+    }
+
     
+
+
+
+
+
 
 };
 
