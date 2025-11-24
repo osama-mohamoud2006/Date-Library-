@@ -627,6 +627,55 @@ public:
     }
 
     // 33 -> 46
+    static  bool isFirstMonthInTheYear(clsDate date)
+    {
+      return (date.m == 1); // if m=1
+    }
+    bool isFirstMonthInTheYear() {
+        return isFirstMonthInTheYear(*this);
+    }
+
+    static clsDate DecreaseOneDay(clsDate date)
+    {
+
+        if (isFirstMonthInTheYear(date)) // 1/1/2020 --> 31/12/2019
+        {
+            if (date.d == 1)
+            {
+                date.y--;                                     // 2019
+                date.m = 12;                                  // 12
+                date.d = NumberOfDaysInMonth(date.y, date.m); // 31
+                return clsDate(date.d , date.m , date.y);
+            }
+        }
+        else if (date.d == 1) // 1/4/2020 --> 31/3/2020
+        {
+            date.m--;                                     // 3
+            date.d = NumberOfDaysInMonth(date.y, date.m); // 31
+            return clsDate(date.d,date.m,date.y);
+        }
+        else
+        {
+            date.d--;
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void DecreaseOneDay() {
+        *this = DecreaseOneDay(*this);
+    }
+
+    static clsDate DecreaseXDays(short x, clsDate date)
+    {
+        for (short i = 1; i <= x; i++)
+        {
+            date = DecreaseOneDay(date);
+        }
+        return clsDate(date.d,date.m,date.y);
+    }
+    void  DecreaseXDays(short x) {
+        *this = DecreaseXDays(x,*this);
+    }
+    
 
 };
 
