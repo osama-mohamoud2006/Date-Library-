@@ -2,7 +2,7 @@
 class clsPeriod {
     clsDate Period1;
     clsDate Period2;
-
+public:
     clsPeriod( clsDate Period1, clsDate Period2) {
         this->Period1 = Period1;
         this->Period2 = Period2;
@@ -20,7 +20,7 @@ class clsPeriod {
     }
 
     void PrintPeriods() {
-        cout<<"the start date is: "<<Period1<<endl;
-        cout<<"the end date is: "<<Period2<<endl;
+        cout<<"the start date is: "<<Period1.FullDate()<<endl;
+        cout<<"the end date is: "<<Period2.FullDate()<<endl;
     }
 };

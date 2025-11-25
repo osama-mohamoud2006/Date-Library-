@@ -1,7 +1,7 @@
 // cpp
 #pragma once
 #include <iostream>
-#include "E:\projects\c++ course\10-OOP Concepts\Project 2\Project 2\clsString.h";
+#include "E:\projects\c++ course\10-OOP Concepts\Project 2\Project 2\clsString.h"
 #include <string>
 #include <iomanip>
 #include<vector>
@@ -582,17 +582,20 @@ public:
    static clsDate AddOneYear(clsDate date)
     {
         date.y++;
+        short numOfDaysInCurrentMonth =  NumberOfDaysInMonth(date.y,date.m);
+        if (date.d >numOfDaysInCurrentMonth) date.d = numOfDaysInCurrentMonth;
         return date;
     }
     void  AddOneYear() {
         *this = AddOneYear(*this);
     }
 
-    static  clsDate AddXYears(short x, clsDate date)
+    static  clsDate AddXYears(short x, clsDate &date)
     {
         for (int i = 1; i <= x; i++)
         {
             date = AddOneYear(date);
+
         }
         return date;
     }
@@ -651,23 +654,25 @@ public:
     static clsDate DecreaseOneDay(clsDate date)
     {
 
-        if (isFirstMonthInTheYear(date)) // 1/1/2020 --> 31/12/2019
+        if (isFirstMonthInTheYear(date)) // January
         {
-            if (date.d == 1)
+            if (date.d == 1) // 1/1/2020 --> 31/12/2019
             {
                 date.y--;                                     // 2019
                 date.m = 12;                                  // 12
                 date.d = NumberOfDaysInMonth(date.y, date.m); // 31
-                return date;
+            }
+            else // Other days in January (15/1 --> 14/1)
+            {
+                date.d--;
             }
         }
         else if (date.d == 1) // 1/4/2020 --> 31/3/2020
         {
             date.m--;                                     // 3
             date.d = NumberOfDaysInMonth(date.y, date.m); // 31
-            return date;
         }
-        else
+        else // Normal case: decrease the day
         {
             date.d--;
         }
@@ -677,7 +682,7 @@ public:
         *this = DecreaseOneDay(*this);
     }
 
-    static clsDate DecreaseXDays(short x, clsDate date)
+    static clsDate DecreaseXDays(short x, clsDate &date)
     {
         for (short i = 1; i <= x; i++)
         {
@@ -750,6 +755,8 @@ public:
     static clsDate DecreaseOneYear(clsDate date)
     {
         date.y--;
+        short numOfDaysInCurrentMonth =  NumberOfDaysInMonth(date.y,date.m);
+        if (date.d >numOfDaysInCurrentMonth) date.d = numOfDaysInCurrentMonth;
         return date;
     }
     void DecreaseOneYear() {
