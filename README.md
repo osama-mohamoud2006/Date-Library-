@@ -14,8 +14,7 @@ A feature-rich C++ class for date manipulation with 40+ methods covering all asp
 - [Building](#building)
 - [Testing](#testing)
 - [Known Issues](#known-issues)
-- [Future Improvements](#future-improvements)
-- [Author](#author)
+
 
 ## 🎯 Overview
 
