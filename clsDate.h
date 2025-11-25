@@ -1,3 +1,4 @@
+// cpp
 #pragma once
 #include <iostream>
 #include "E:\projects\c++ course\10-OOP Concepts\Project 2\Project 2\clsString.h";
@@ -369,7 +370,7 @@ public:
                 break;
             }
         }
-        return clsDate(date.d, date.m , date.y);
+        return date;
     }
     void AddDaysToDate(short d) override {
        *this = AddDaysToDate(*this ,d);
@@ -432,7 +433,7 @@ public:
         {
             date.d = date.d + 1;
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void dateAfterAddingOneDay() {
        *this =  dateAfterAddingOneDay(*this);
@@ -510,7 +511,7 @@ public:
         {
             date = dateAfterAddingOneDay(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddXdays(short days) {
         *this =  AddXdays(days,*this );
@@ -522,22 +523,22 @@ public:
         {
             date = dateAfterAddingOneDay(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddOneWeek() {
        *this =  AddOneWeek(*this);
     }
 
-    static clsDate AddXWeeks(short x, clsDate date)
+    static clsDate AddXweeks(short x, clsDate date)
     {
         for (int i = 1; i <= x; i++)
         {
             date = AddOneWeek(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
-    void AddXWeeks(short x) {
-        *this = AddXWeeks(x,*this);
+    void AddXweeks(short x) {
+        *this = AddXweeks(x,*this);
     }
 
 
@@ -560,7 +561,7 @@ public:
         {
             date.d=ActualDaysInMonth ;
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddOneMonth() {
         *this = AddOneMonth(*this);
@@ -572,7 +573,7 @@ public:
         {
             date = AddOneMonth(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void  AddXMonths(short x) {
         *this = AddXMonths(x,*this);
@@ -581,7 +582,7 @@ public:
    static clsDate AddOneYear(clsDate date)
     {
         date.y++;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void  AddOneYear() {
         *this = AddOneYear(*this);
@@ -593,7 +594,7 @@ public:
         {
             date = AddOneYear(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddXYears(short x) {
         *this = AddXYears(x,*this);
@@ -602,7 +603,7 @@ public:
     static  clsDate AddOneDecade(clsDate date)
     {
         date.y += 10;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddOneDecade() {
         *this = AddOneDecade(*this);
@@ -614,7 +615,7 @@ public:
         {
             date = AddOneDecade(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AdddXDecade(short x) {
         *this = AdddXDecade(x,*this);
@@ -623,7 +624,7 @@ public:
    static  clsDate AddOneCentury(clsDate date)
     {
         date.y += 100;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddOneCentury() {
         *this = AddOneCentury(*this);
@@ -632,7 +633,7 @@ public:
     static clsDate AddOneMillenuim(clsDate date)
     {
         date.y += 1000;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void AddOneMillenuim() {
         *this = AddOneMillenuim(*this);
@@ -657,20 +658,20 @@ public:
                 date.y--;                                     // 2019
                 date.m = 12;                                  // 12
                 date.d = NumberOfDaysInMonth(date.y, date.m); // 31
-                return clsDate(date.d , date.m , date.y);
+                return date;
             }
         }
         else if (date.d == 1) // 1/4/2020 --> 31/3/2020
         {
             date.m--;                                     // 3
             date.d = NumberOfDaysInMonth(date.y, date.m); // 31
-            return clsDate(date.d,date.m,date.y);
+            return date;
         }
         else
         {
             date.d--;
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneDay() {
         *this = DecreaseOneDay(*this);
@@ -682,7 +683,7 @@ public:
         {
             date = DecreaseOneDay(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void  DecreaseXDays(short x) {
         *this = DecreaseXDays(x,*this);
@@ -694,7 +695,7 @@ public:
         {
             date = DecreaseOneDay(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneWeek() {
         *this = DecreaseOneWeek(*this);
@@ -706,7 +707,7 @@ public:
         {
             date = DecreaseOneWeek(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseXWeeks(short x) {
         *this = DecreaseXWeeks(x,*this);
@@ -718,7 +719,7 @@ public:
         {                // 1/1/2022 --> 1/12/2021
             date.y--;    // 2021
             date.m = 12; // 12
-            return clsDate(date.d,date.m,date.y);
+            return date;
         }
         else
         {
@@ -729,7 +730,7 @@ public:
         {
             date.d = DaysInMonth;
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneMonth() {
         *this = DecreaseOneMonth(*this);
@@ -740,7 +741,7 @@ public:
         {
             date = DecreaseOneMonth(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseXMonth(short x) {
         *this = DecreaseXMonth(x,*this);
@@ -749,7 +750,7 @@ public:
     static clsDate DecreaseOneYear(clsDate date)
     {
         date.y--;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneYear() {
         *this = DecreaseOneYear(*this);
@@ -761,7 +762,7 @@ public:
         {
             date = DecreaseOneYear(date);
         }
-       return clsDate(date.d,date.m,date.y);
+       return date;
 
     }
     void DecreaseXYears(short x) {
@@ -772,7 +773,7 @@ public:
    static  clsDate DecreaseOneDecade(clsDate date)
     {
         date.y -= 10;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneDecade() {
         *this = DecreaseOneDecade(*this);
@@ -784,7 +785,7 @@ public:
         {
             date = DecreaseOneDecade(date);
         }
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
 void DecreaseXdecades(short x = 10) {
         *this = DecreaseXdecades(*this , x);
@@ -793,7 +794,7 @@ void DecreaseXdecades(short x = 10) {
    static clsDate DecreaseOneCentury(clsDate date)
     {
         date.y -= 100;
-        return clsDate(date.d,date.m,date.y);
+        return date;
     }
     void DecreaseOneCentury() {
         *this = DecreaseOneCentury(*this);
@@ -802,16 +803,43 @@ void DecreaseXdecades(short x = 10) {
     static  clsDate DecreaseOneMillenum(clsDate date)
     {
         date.y -= 1000;
-        return clsDate(date.d,date.m,date.y);
+        //return clsDate(date.d,date.m,date.y);
+        return date ;
     }
     void DecreaseOneMillenum() {
         *this = DecreaseOneMillenum(*this);
     }
 
-
+    enum enDateCompare { Before = -1, Equal = 0, After = 1 };
+    static enDateCompare CompareDates(clsDate date1 , clsDate date2) {
+        if (isDate1LessThanDate2(date1,date2)) return enDateCompare::Before;
+        else if (isDate1equalsDate2(date1,date2)) return enDateCompare::Equal;
+        return enDateCompare::After;
+    }
+    enDateCompare CompareDates(clsDate date2) {
+        return CompareDates(*this,date2);
+    }
 
 };
 
-// short  clsDate::d=0;
-// short clsDate::m=0;
-// short clsDate::y=0;
+class clsPeriod {
+    clsDate Period1;
+    clsDate Period2;
+
+    clsPeriod( clsDate Period1, clsDate Period2) {
+      this->Period1 = Period1;
+        this->Period2 = Period2;
+    }
+
+    static bool is2PeriodsOverlaped(clsDate Period1, clsDate Period2) {
+        if (clsDate::CompareDates(Period1,Period2)==clsDate::After
+           ||
+           clsDate::CompareDates(Period1,Period2)==clsDate::Before) return true;
+
+        else return false; // p1=p2
+    }
+    bool is2PeriodsOverlaped( clsDate Period2) {
+        return is2PeriodsOverlaped(*this,Period2);
+    }
+
+};
