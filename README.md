@@ -2,7 +2,7 @@
 
 A feature-rich C++ class for date manipulation with 40+ methods covering all aspects of date arithmetic, comparison, and calendar operations.
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -16,7 +16,7 @@ A feature-rich C++ class for date manipulation with 40+ methods covering all asp
 - [Known Issues](#known-issues)
 
 
-## 🎯 Overview
+##  Overview
 
 The **clsDate** class is a complete date manipulation library built in C++ that implements the abstract interface `clsDateFunctions`. It provides static and instance methods for comprehensive date operations including:
 
