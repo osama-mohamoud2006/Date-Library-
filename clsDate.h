@@ -822,24 +822,3 @@ void DecreaseXdecades(short x = 10) {
 
 };
 
-class clsPeriod {
-    clsDate Period1;
-    clsDate Period2;
-
-    clsPeriod( clsDate Period1, clsDate Period2) {
-      this->Period1 = Period1;
-        this->Period2 = Period2;
-    }
-
-    static bool is2PeriodsOverlaped(clsDate Period1, clsDate Period2) {
-        if (clsDate::CompareDates(Period1,Period2)==clsDate::After
-           ||
-           clsDate::CompareDates(Period1,Period2)==clsDate::Before) return true;
-
-        else return false; // p1=p2
-    }
-    bool is2PeriodsOverlaped( clsDate Period2) {
-        return is2PeriodsOverlaped(*this,Period2);
-    }
-
-};

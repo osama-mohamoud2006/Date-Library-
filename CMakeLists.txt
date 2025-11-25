@@ -4,4 +4,5 @@ project(Project_3)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(Project_3 main.cpp
-        clsDate.h)
+        clsDate.h
+        clsPeriod.h)
